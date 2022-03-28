@@ -1,0 +1,6 @@
+@keyframes show {
+		0% {
+			opacity: .5;
+			transform: scale(0);
+		}
+	}

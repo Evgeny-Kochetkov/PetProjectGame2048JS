@@ -1,0 +1,7 @@
+:root {
+    --border-radius: 1vmin;
+    --bg-page: #333;
+    --bg-board: #CCC;
+    --bg-cell: #AAA;
+    --hsl-color: 100;
+}

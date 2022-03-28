@@ -1,0 +1,40 @@
+body {
+    background-color: var(--bg-page);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    gap: var(--cell-gap);
+    padding:  var(--cell-gap);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-board);
+    position: relative;
+}
+
+.cell {
+    background-color: var(--bg-cell);
+    border-radius: var(--border-radius);
+}
+
+.tile {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color:red;
+    border-radius: var(--border-radius);
+    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    background-color: hsl(var(--hsl-color), 50%, var(--bg-lightness));
+    color: hsl(var(--hsl-color), 25%, var(--text-lightness));
+    animation: show 200ms ease-in-out;
+    transition: 100ms ease-in-out;
+}

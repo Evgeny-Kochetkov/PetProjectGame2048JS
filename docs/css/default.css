@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+ul[class],
+ol[class] {
+    list-style-type: none;
+    padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 7.5vmin;
+    font-weight: 500;
+    margin: 0 auto;
+    height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    padding: 0;
+	border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+a {
+    cursor: pointer;
+    text-decoration-line: none;
+}
+
+.hidden {
+    display: none;
+}
