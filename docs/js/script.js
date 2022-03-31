@@ -172,3 +172,4 @@ new createNode('.modal', 'div', '', 'content');
 		new createNode('.modal__nav', 'button', 'Start playing', 'btn', 'modal__btn');
 		new createNode('.modal__nav', 'button', 'New Game', 'btn', 'modal__btn');
 	new createNode('.content', 'h2', 'HOW TO PLAY', 'modal__how');
+	new createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!', 'modal__descr');

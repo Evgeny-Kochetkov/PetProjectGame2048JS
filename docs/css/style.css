@@ -43,26 +43,29 @@ body {
 .modal {
     position: fixed;
     left: 2vmin;
-    /* width: 25%; */
-    height: 95%;
+    width: 50vmin;
+    height: 90vmin;
     background-color: var(--bg-board);
-    opacity: 0.9;
+    opacity: 0.9    ;
     z-index: 2;
     border-radius: calc(var(--border-radius) * 2);
     padding: var(--padding);
 }
 
     .content {
-        display: grid;
-        grid-template-rows: 1fr 3fr 3fr;
+        display: flex;
+        flex-direction: column;
         justify-items: center;
+        align-items: center;
     }
 
         .modal__h1 {
             font-size: 9vmin;
+            color: var(--text-color);
         }
 
         .modal__nav {
+            margin-top: var(--m-t);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -76,8 +79,19 @@ body {
                 border-radius: calc(var(--border-radius));
                 font-size: var(--font-size-btn);
                 font-weight: 700;
+                color: var(--text-color);
             }
         
         .modal__how {
+            margin-top: var(--m-t);
             font-size: 4.4vmin;
+            color: var(--text-color);
+        }
+
+        .modal__descr {
+            margin-top: var(--m-t);
+            display: flex;
+            font-size: 3vmin;
+            text-align: center;
+            color: var(--bg-page);
         }

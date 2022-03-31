@@ -1,9 +1,11 @@
 :root {
-    --border-radius: 1vmin;
+    --text-color: black;
     --bg-page: #333;
     --bg-board: #CCC;
     --bg-cell: #AAA;
     --hsl-color: 100;
+    --border-radius: 1vmin;
     --padding: 5vmin;
+    --m-t: 2vmin;
     --font-size-btn: 4vmin;
 }
