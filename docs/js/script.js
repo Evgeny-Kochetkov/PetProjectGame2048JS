@@ -153,3 +153,13 @@ function canMove(cells) {
 		});
   	});
 }
+
+class ElementConstructor {
+	constructor (parentSelector, element, html, ...classes) {
+		this.parrent = document.querySelector(parentSelector);
+		this.element = document.createElement(element);
+		this.parrent.append(this.element);
+		this.html = this.element.innerHTML = html;
+		this.classes = classes.forEach(className => this.element.classList.add(className));
+	}
+}
