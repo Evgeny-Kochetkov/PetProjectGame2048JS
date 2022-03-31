@@ -164,4 +164,11 @@ class createNode {
 	}
 }
 
-/* const modal = new createNode('body', 'div', '', 'modal'); */
+const modal = new createNode('body', 'div', '', 'modal');
+
+new createNode('.modal', 'div', '', 'content');
+	new createNode('.content', 'h1', '2048', 'modal__h1');
+	new createNode('.content', 'nav', '', 'modal__nav');
+		new createNode('.modal__nav', 'button', 'Start playing', 'btn', 'modal__btn');
+		new createNode('.modal__nav', 'button', 'New Game', 'btn', 'modal__btn');
+	new createNode('.content', 'h2', 'HOW TO PLAY', 'modal__how');

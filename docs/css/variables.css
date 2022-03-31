@@ -4,6 +4,6 @@
     --bg-board: #CCC;
     --bg-cell: #AAA;
     --hsl-color: 100;
-    --padding: 2vmin;
-    /* --font-size-cell : 7.5vmin; */
+    --padding: 5vmin;
+    --font-size-btn: 4vmin;
 }

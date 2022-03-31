@@ -1,5 +1,5 @@
 const gridSize = 4;
-const cellSize = 20;
+const cellSize = 18;
 const cellGap = 2;
 
 export default class Grid {
