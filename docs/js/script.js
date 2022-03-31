@@ -154,7 +154,7 @@ function canMove(cells) {
   	});
 }
 
-class ElementConstructor {
+class createNode {
 	constructor (parentSelector, element, html, ...classes) {
 		this.parrent = document.querySelector(parentSelector);
 		this.element = document.createElement(element);
@@ -163,3 +163,5 @@ class ElementConstructor {
 		this.classes = classes.forEach(className => this.element.classList.add(className));
 	}
 }
+
+/* const modal = new createNode('body', 'div', '', 'modal'); */

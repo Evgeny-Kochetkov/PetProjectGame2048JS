@@ -26,6 +26,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: var(--font-size-cell);
     font-weight: 700;
     width: var(--cell-size);
     height: var(--cell-size);
@@ -37,4 +38,15 @@ body {
     color: hsl(var(--hsl-color), 25%, var(--text-lightness));
     animation: show 200ms ease-in-out;
     transition: 100ms ease-in-out;
+}
+
+.modal {
+    position: fixed;
+    width: 80%;
+    height: 95%;
+    background-color: var(--bg-board);
+    opacity: 0.9;
+    z-index: 2;
+    border-radius: calc(var(--border-radius) * 4);
+    padding: var(--padding);
 }

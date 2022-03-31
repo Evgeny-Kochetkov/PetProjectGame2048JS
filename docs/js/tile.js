@@ -20,6 +20,7 @@ export default class Tile {
 		this.#tileElement.textContent = v;
 		const power = Math.log2(v);
 		const bgLightness = 100 - power * 9;
+		const textSize = 8 - (power/4);
 		this.#tileElement.style.setProperty(
 			"--bg-lightness",
 			`${bgLightness}%`
@@ -27,6 +28,10 @@ export default class Tile {
 		this.#tileElement.style.setProperty(
 			"--text-lightness",
 			`${bgLightness <= 50 ? 90 : 10}%`
+		);
+		this.#tileElement.style.setProperty(
+			"--font-size-cell",
+			`${textSize}vmin`
 		);
 	}
 
