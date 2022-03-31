@@ -93,35 +93,34 @@ function moveRight() {
 
 function slideTiles(cells) {
   	return Promise.all(
-	cells.flatMap(group => {
-	  	const promises = [];
-		for (let i = 1; i < group.length; i++) {
-			const cell = group[i];
-			if (cell.tile == null) {
-				continue;
-			}
-			let lastValidCell;
-			for (let k = i - 1; k >= 0; k--) {
-			const moveToCell = group[k];
-				if (!moveToCell.canAccept(cell.tile)) {
-					break;
+		cells.flatMap(group => {
+			const promises = [];
+			for (let i = 1; i < group.length; i++) {
+				const cell = group[i];
+				if (cell.tile == null) {
+					continue;
 				}
-			lastValidCell = moveToCell;
-			}
-
-			if (lastValidCell != null) {
-				promises.push(cell.tile.waitForTransition());
-				if (lastValidCell.tile != null) {
-					lastValidCell.mergeTile = cell.tile;
-				} else {
-					lastValidCell.tile = cell.tile;
+				let lastValidCell;
+				for (let k = i - 1; k >= 0; k--) {
+					const moveToCell = group[k];
+					if (!moveToCell.canAccept(cell.tile)) {
+						break;
+					}
+					lastValidCell = moveToCell;
 				}
-				cell.tile = null;
+				if (lastValidCell != null) {
+					promises.push(cell.tile.waitForTransition());
+					if (lastValidCell.tile != null) {
+						lastValidCell.mergeTile = cell.tile;
+					} else {
+						lastValidCell.tile = cell.tile;
+					}
+					cell.tile = null;
+				}
 			}
-		}
-	  	return promises;
-	})
-  );
+			return promises;
+		})
+  	);
 }
 
 function canMoveUp() {

@@ -19,14 +19,14 @@ export default class Tile {
 		this.#value = v;
 		this.#tileElement.textContent = v;
 		const power = Math.log2(v);
-		const backgroundLightness = 100 - power * 9;
+		const bgLightness = 100 - power * 9;
 		this.#tileElement.style.setProperty(
 			"--bg-lightness",
-			`${backgroundLightness}%`
+			`${bgLightness}%`
 		);
 		this.#tileElement.style.setProperty(
 			"--text-lightness",
-			`${backgroundLightness <= 50 ? 90 : 10}%`
+			`${bgLightness <= 50 ? 90 : 10}%`
 		);
 	}
 

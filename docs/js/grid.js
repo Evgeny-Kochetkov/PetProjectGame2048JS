@@ -42,7 +42,7 @@ export default class Grid {
         const randomIndex = Math.floor(Math.random() * this.#emptyCells.length);
         return this.#emptyCells[randomIndex];
     }
-    }
+}
     
 class Cell {
     #cellElement;
