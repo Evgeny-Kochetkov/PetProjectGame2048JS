@@ -139,9 +139,9 @@ body {
             }
 
                 .hamburger__line { 
-                    height: 0.6vmin;
-                    width: 5vmin;
+                    height: calc(var(--hamburger-line-width) / 8);
+                    width: var(--hamburger-line-width);
                     background-color: var(--bg-page);
-                    border-radius: 0.6vmin;
+                    border-radius: calc(var(--hamburger-line-width) / 8);
                     transition: 0.5s all;
                 }
