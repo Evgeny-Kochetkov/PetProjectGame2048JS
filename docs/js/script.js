@@ -155,21 +155,25 @@ function canMove(cells) {
 }
 
 class createNode {
-	constructor (parentSelector, element, html, ...classes) {
+	constructor (parentSelector, element, text, ...classes) {
 		this.parrent = document.querySelector(parentSelector);
 		this.element = document.createElement(element);
 		this.parrent.append(this.element);
-		this.html = this.element.innerHTML = html;
+		this.html = this.element.textContent = text;
 		this.classes = classes.forEach(className => this.element.classList.add(className));
 	}
 }
-
+/* new createNode('', '', '', ''); */
 const modal = new createNode('body', 'div', '', 'modal');
-
-new createNode('.modal', 'div', '', 'content');
-	new createNode('.content', 'h1', '2048', 'modal__h1');
-	new createNode('.content', 'nav', '', 'modal__nav');
-		new createNode('.modal__nav', 'button', 'Start playing', 'btn', 'modal__btn');
-		new createNode('.modal__nav', 'button', 'New Game', 'btn', 'modal__btn');
-	new createNode('.content', 'h2', 'HOW TO PLAY', 'modal__how');
-	new createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!', 'modal__descr');
+	new createNode('.modal', 'div', '', 'content');
+		new createNode('.content', 'h1', '2048', 'modal__h1');
+		new createNode('.content', 'nav', '', 'modal__nav');
+			new createNode('.modal__nav', 'button', 'Start playing', 'btn', 'modal__btn');
+			new createNode('.modal__nav', 'button', 'New Game', 'btn', 'modal__btn');
+		new createNode('.content', 'h2', 'HOW TO PLAY', 'modal__how');
+		new createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!', 'modal__descr');
+		new createNode('.content', 'button', '', 'hamburger', 'modal__hamburger');
+			new createNode('.hamburger', 'div', '', 'wrap', 'hamburger__wrap', /* 'hamburger__wrap_active' */);
+				new createNode('.hamburger__wrap', 'span', '', 'hamburger__line');
+				new createNode('.hamburger__wrap', 'span', '', 'hamburger__line');
+				new createNode('.hamburger__wrap', 'span', '', 'hamburger__line');
