@@ -154,26 +154,32 @@ function canMove(cells) {
   	});
 }
 
-class createNode {
-	constructor (parentSelector, element, text, ...classes) {
-		this.parrent = document.querySelector(parentSelector);
-		this.element = document.createElement(element);
-		this.parrent.append(this.element);
-		this.html = this.element.textContent = text;
-		this.classes = classes.forEach(className => this.element.classList.add(className));
+function createNode(parentSelector, element, text, id, href, ...classes) {
+	const parrentNode = document.querySelector(parentSelector);
+	const elementNode = document.createElement(element);
+	parrentNode.append(elementNode);
+	if (text) {elementNode.textContent = text;}
+	if (id) {elementNode.id = id;}
+	if (href) {elementNode.href = href;}
+	if (classes) {
+		classes.forEach(className => elementNode.classList.add(className));
+	} else {
+		elementNode.classList.add('');
 	}
 }
-/* new createNode('', '', '', ''); */
-const modal = new createNode('body', 'div', '', 'modal');
-	new createNode('.modal', 'div', '', 'content');
-		new createNode('.content', 'h1', '2048', 'modal__h1');
-		new createNode('.content', 'nav', '', 'modal__nav');
-			new createNode('.modal__nav', 'button', 'Start playing', 'btn', 'modal__btn');
-			new createNode('.modal__nav', 'button', 'New Game', 'btn', 'modal__btn');
-		new createNode('.content', 'h2', 'HOW TO PLAY', 'modal__how');
-		new createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!', 'modal__descr');
-		new createNode('.content', 'button', '', 'hamburger', 'modal__hamburger');
-			new createNode('.hamburger', 'div', '', 'wrap', 'hamburger__wrap', /* 'hamburger__wrap_active' */);
-				new createNode('.hamburger__wrap', 'span', '', 'hamburger__line');
-				new createNode('.hamburger__wrap', 'span', '', 'hamburger__line');
-				new createNode('.hamburger__wrap', 'span', '', 'hamburger__line');
+
+/* new createNode('', '', '', '', '', ''); */
+createNode('body', 'div', '', '', '', 'modal');
+	createNode('.modal', 'div', '', '', '', 'content');
+		createNode('.content', 'h1', '2048', '', '', 'modal__h1');
+		createNode('.content', 'nav', '', '', '', 'modal__nav');
+			createNode('.modal__nav', 'button', 'Start playing', '', '', 'btn', 'modal__btn');
+			createNode('.modal__nav', 'button', 'New Game',  '', '', 'btn', 'modal__btn');
+		createNode('.content', 'h2', 'HOW TO PLAY',  '', '', 'modal__how');
+		createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!',  '', '', 'modal__descr');
+		createNode('.content', 'button', '',  '', '', 'hamburger', 'modal__hamburger');
+			createNode('.hamburger', 'div', '',  '', '', 'wrap', 'hamburger__wrap', 'hamburger__wrap_active');
+				createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
+				createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
+				createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
+	
