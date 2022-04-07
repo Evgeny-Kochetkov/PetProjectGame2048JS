@@ -172,9 +172,9 @@ function createNode(parentSelector, element, text, id, href, ...classes) {
 createNode('body', 'div', '', 'modal', '', 'modal');
 	createNode('.modal', 'div', '', '', '', 'content');
 		createNode('.content', 'h1', '2048', '', '', 'modal__h1');
-		createNode('.content', 'nav', '', '', '', 'modal__nav');
-			createNode('.modal__nav', 'button', 'Start playing', 'btn-start', '', 'btn', 'modal__btn');
-			createNode('.modal__nav', 'button', 'New Game',  '', '', 'btn', 'modal__btn');
+		createNode('.content', 'div', '', '', '', 'modal__btns');
+			createNode('.modal__btns', 'button', 'Start playing', 'btn-start', '', 'btn', 'modal__btn');
+			createNode('.modal__btns', 'button', 'New Game',  '', '', 'btn', 'modal__btn');
 		createNode('.content', 'h2', 'HOW TO PLAY',  '', '', 'modal__how');
 		createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!',  '', '', 'modal__descr');
 createNode('body', 'button', '',  'btn-hamburger', '', 'btn', 'hamburger');
@@ -182,32 +182,38 @@ createNode('body', 'button', '',  'btn-hamburger', '', 'btn', 'hamburger');
 		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
 		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
 		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
+createNode('body', 'div', '', 'leaderboard', '', 'leaderboard');
+	createNode('.leaderboard', 'div', '', '', '', 'leaderboard__wrap');
+		createNode('.leaderboard__wrap', 'h2', 'Leaderboard', '', '', 'leaderboard__title');
+createNode('body', 'button', '',  'btn-leaderboard', '', 'btn', 'btn-leaderboard');
+		
 
 const body = document.querySelector('body');
 const modal = document.getElementById('modal');
 const hamburger = document.getElementById('btn-hamburger');
 const hamburgerWrap = document.getElementById('hamburger-wrap');
 const btnStart = document.getElementById('btn-start');
+const leaderboard = document.getElementById('leaderboard');
+const btnLeaderboadr = document.getElementById('btn-leaderboard');
+const leders = [];
 
-function modalClose() {
-	modal.classList.toggle('hide');
+function modalClose(e) {
+	e.preventDefault();
+	modal.classList.toggle('modal_active');
 	hamburgerWrap.classList.toggle('hamburger__wrap_active');
 }
 
-hamburger.addEventListener('click', (e) => {
-	e.preventDefault();
-	modalClose();
-});
+hamburger.addEventListener('click', modalClose);
+btnStart.addEventListener('click', modalClose);
 
-btnStart.addEventListener('click', (e) => {
-	e.preventDefault();
-	modalClose();
-});
-
-body.addEventListener('click', (e) => {
-	e.preventDefault();
-	if (e.target === body) {
-		modal.classList.add('hide');
+body.addEventListener('click', (event) => {
+	if (event.target === body) {
+		modal.classList.add('modal_active');
 		hamburgerWrap.classList.remove('hamburger__wrap_active');
+		leaderboard.classList.remove('leaderboard_active');
 	}
+});
+
+btnLeaderboadr.addEventListener('click', (e) => {
+	leaderboard.classList.toggle('leaderboard_active');
 });
