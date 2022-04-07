@@ -4,7 +4,7 @@
 //TODO 4) Btn New Game
 //TODO 5) Ability to change color
 //TODO 6) Ability to change grid size
-//TODO 7) Modal "How to play"
+//TODO 7) Modal "How to play"              DONE!
 //TODO 8) Adaptation for mobile devices
 //TODO 9) Modal "Game Over" and "You Win"
 //TODO 10) Social link
@@ -177,7 +177,7 @@ createNode('body', 'div', '', 'modal', '', 'modal');
 			createNode('.modal__nav', 'button', 'New Game',  '', '', 'btn', 'modal__btn');
 		createNode('.content', 'h2', 'HOW TO PLAY',  '', '', 'modal__how');
 		createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!',  '', '', 'modal__descr');
-createNode('body', 'button', '',  'hamburger', '', 'hamburger', 'modal__hamburger');
+createNode('body', 'button', '',  'btn-hamburger', '', 'btn', 'hamburger');
 	createNode('.hamburger', 'div', '',  'hamburger-wrap', '', 'wrap', 'hamburger__wrap', 'hamburger__wrap_active');
 		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
 		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
@@ -185,7 +185,7 @@ createNode('body', 'button', '',  'hamburger', '', 'hamburger', 'modal__hamburge
 
 const body = document.querySelector('body');
 const modal = document.getElementById('modal');
-const hamburger = document.getElementById('hamburger');
+const hamburger = document.getElementById('btn-hamburger');
 const hamburgerWrap = document.getElementById('hamburger-wrap');
 const btnStart = document.getElementById('btn-start');
 

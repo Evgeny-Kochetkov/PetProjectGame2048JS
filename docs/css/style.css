@@ -45,7 +45,6 @@ body {
 	width: 75%;
 	height: 95%;
 	background-color: var(--bg-board);
-	opacity: 0.98;
 	z-index: 2;
 	border-radius: calc(var(--border-radius) * 2);
 	padding: var(--padding);
@@ -81,6 +80,13 @@ body {
 				font-size: var(--font-size-btn);
 				font-weight: 700;
 				color: var(--text-color);
+				transition: 200ms ease-in-out;
+			}
+
+			.btn:hover, 
+			.btn:active {
+				background-color:hsl(var(--hsl-color), 50%, 90%);
+				transition: 200ms ease-in-out;
 			}
 		
 		.modal__how {
@@ -99,7 +105,7 @@ body {
 		}
 
 		.hamburger {
-			z-index: 2;
+			z-index: 3;
 			position: fixed;
 			top: 2.5vmin;
 			right: 2.5vmin;
@@ -107,11 +113,8 @@ body {
 			height: var(--hamburger-size);
 			background-color: var(--bg-cell);
 			border-radius: var(--hamburger-size);
+			transition: 200ms ease-in-out;
 		}
-
-			.hamburger__wrap_active {
-
-			}
 
 			.hamburger__wrap {
 				display: grid;
