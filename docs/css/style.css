@@ -200,3 +200,21 @@ body {
     	padding-top: 100%;
 		background: url('../icons/star.svg') center center/70% no-repeat;
 	}
+/* 	.moves {
+		z-index: 3;
+		position: fixed;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 4vmin;
+		font-weight: 700;
+		top: 25%;
+		right: 5%;
+		margin: 1%;
+		width: var(--hamburger-size);
+		height: var(--hamburger-size);
+		background-color: var(--bg-cell);
+		border-radius: var(--border-radius);
+		transition: 200ms ease-in-out;
+		animation: show 100ms ease-in-out;
+	} */

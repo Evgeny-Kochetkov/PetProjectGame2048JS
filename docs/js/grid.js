@@ -95,10 +95,11 @@ class Cell {
     }
 
     mergeTiles() {
-        if (this.tile == null || this.mergeTile == null) return
+        if (this.tile == null || this.mergeTile == null) return 0;
         this.tile.value = this.tile.value + this.mergeTile.value;
         this.mergeTile.remove();
         this.mergeTile = null;
+        return this.tile.value;
     }
 }
 
