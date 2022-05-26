@@ -1,7 +1,7 @@
 //TODO 1) Move back
 //TODO 2) Score and Best Score
-//TODO 3) Modal "Leaderboard"
-//TODO 4) Btn New Game
+//TODO 3) Modal "Leaderboard"             5|10 DONE!
+//TODO 4) Btn New Game                    5|10 DONE!
 //TODO 5) Ability to change color
 //TODO 6) Ability to change grid size
 //TODO 7) Modal "How to play"              DONE!
@@ -16,14 +16,13 @@ const gameBoard = document.getElementById("game-board");
 
 const grid = new Grid(gameBoard);
 
-/* grid.randomEmptyCell().tile = new Tile(gameBoard);
-grid.randomEmptyCell().tile = new Tile(gameBoard); */
-
 const initializeNewGame = () => {
-	grid.randomEmptyCell().tile = new Tile(gameBoard);
-	grid.randomEmptyCell().tile = new Tile(gameBoard);
-	hamburger.removeEventListener('click', initializeNewGame);
-	btnStart.removeEventListener('click', initializeNewGame);
+	for (let i = 0; i < 2; i ++) {
+		grid.randomEmptyCell().tile = new Tile(gameBoard);
+	}
+	arrBtnStart.forEach((btn) => {
+		btn.removeEventListener('click', initializeNewGame);
+	});
 };
 
 
