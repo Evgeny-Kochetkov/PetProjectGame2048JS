@@ -12,6 +12,82 @@
 import Grid from "./grid.js";
 import Tile from "./tile.js";
 
+//HTML
+function createNode(parentSelector, element, text, id, href, ...classes) {
+	const parrentNode = document.querySelector(parentSelector);
+	const elementNode = document.createElement(element);
+	parrentNode.append(elementNode);
+	if (text) {elementNode.textContent = text;}
+	if (id) {elementNode.id = id;}
+	if (href) {elementNode.href = href;}
+	if (classes) {
+		classes.forEach(className => elementNode.classList.add(className));
+	} else {
+		elementNode.classList.add('');
+	}
+}
+
+/* new createNode('', '', '', '', '', ''); */
+createNode('body', 'div', '', 'modal', '', 'modal');
+	createNode('.modal', 'div', '', '', '', 'content');
+		createNode('.content', 'h1', '2048', '', '', 'modal__h1');
+		createNode('.content', 'div', '', '', '', 'modal__btns');
+			createNode('.modal__btns', 'button', 'Start playing', 'btn-start', '', 'btn', 'modal__btn');
+			createNode('.modal__btns', 'button', 'New Game',  'btn-new-game', '', 'btn', 'modal__btn');
+		createNode('.content', 'h2', 'HOW TO PLAY',  '', '', 'modal__how');
+		createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!',  '', '', 'modal__descr');
+createNode('body', 'button', '',  'btn-hamburger', '', 'btn', 'hamburger');
+	createNode('.hamburger', 'div', '',  'hamburger-wrap', '', 'wrap', 'hamburger__wrap', 'hamburger__wrap_active');
+		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
+		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
+		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
+createNode('body', 'div', '', 'leaderboard', '', 'leaderboard');
+	createNode('.leaderboard', 'div', '', '', '', 'leaderboard__wrap');
+		createNode('.leaderboard__wrap', 'h2', 'Leaderboard', '', '', 'leaderboard__title');
+createNode('body', 'button', '',  'btn-leaderboard', '', 'btn', 'btn-leaderboard');
+
+const body = document.querySelector('body');
+const modal = document.getElementById('modal');
+const hamburger = document.getElementById('btn-hamburger');
+const hamburgerWrap = document.getElementById('hamburger-wrap');
+const btnStart = document.getElementById('btn-start');
+const btnNewGame = document.getElementById('btn-new-game');
+const leaderboard = document.getElementById('leaderboard');
+const btnLeaderboadr = document.getElementById('btn-leaderboard');
+const arrBtnStart = [hamburger, btnStart];
+const leders = [];
+
+function modalClose(e) {
+	e.preventDefault();
+	modal.classList.toggle('modal_active');
+	hamburgerWrap.classList.toggle('hamburger__wrap_active');
+}
+
+arrBtnStart.forEach((btn) => {
+	btn.addEventListener('click', modalClose);
+	btn.addEventListener('click', initializeNewGame, { once: true });
+});
+
+body.addEventListener('click', (event) => {
+	if (event.target === body) {
+		modal.classList.add('modal_active');
+		hamburgerWrap.classList.remove('hamburger__wrap_active');
+		leaderboard.classList.remove('leaderboard_active');
+	}
+});
+
+btnLeaderboadr.addEventListener('click', (e) => {
+	leaderboard.classList.toggle('leaderboard_active');
+});
+
+/* btnNewGame.addEventListener('click', () => {
+	
+}); */
+
+/* createNode('body', 'div', `${moves}`,  'moves', '', 'moves'); */
+
+
+//GAME
 const gameBoard = document.getElementById("game-board");
 
 const grid = new Grid(gameBoard);
@@ -23,8 +99,7 @@ function initializeNewGame () {
 	arrBtnStart.forEach((btn) => {
 		btn.removeEventListener('click', initializeNewGame);
 	});
-};
-
+}
 
 setupInput();
 
@@ -113,7 +188,7 @@ function slideTiles(cells) {
 					if (!moveToCell.canAccept(cell.tile)) {
 						break;
 					}
-					lastValidCell = moveToCell;
+					lastValidCell = moveToCell;	
 				}
 				if (lastValidCell != null) {
 					promises.push(cell.tile.waitForTransition());
@@ -160,76 +235,3 @@ function canMove(cells) {
 		});
   	});
 }
-
-function createNode(parentSelector, element, text, id, href, ...classes) {
-	const parrentNode = document.querySelector(parentSelector);
-	const elementNode = document.createElement(element);
-	parrentNode.append(elementNode);
-	if (text) {elementNode.textContent = text;}
-	if (id) {elementNode.id = id;}
-	if (href) {elementNode.href = href;}
-	if (classes) {
-		classes.forEach(className => elementNode.classList.add(className));
-	} else {
-		elementNode.classList.add('');
-	}
-}
-
-/* new createNode('', '', '', '', '', ''); */
-createNode('body', 'div', '', 'modal', '', 'modal');
-	createNode('.modal', 'div', '', '', '', 'content');
-		createNode('.content', 'h1', '2048', '', '', 'modal__h1');
-		createNode('.content', 'div', '', '', '', 'modal__btns');
-			createNode('.modal__btns', 'button', 'Start playing', 'btn-start', '', 'btn', 'modal__btn');
-			createNode('.modal__btns', 'button', 'New Game',  'btn-new-game', '', 'btn', 'modal__btn');
-		createNode('.content', 'h2', 'HOW TO PLAY',  '', '', 'modal__how');
-		createNode('.content', 'p', 'Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach 2048!',  '', '', 'modal__descr');
-createNode('body', 'button', '',  'btn-hamburger', '', 'btn', 'hamburger');
-	createNode('.hamburger', 'div', '',  'hamburger-wrap', '', 'wrap', 'hamburger__wrap', 'hamburger__wrap_active');
-		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
-		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
-		createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
-createNode('body', 'div', '', 'leaderboard', '', 'leaderboard');
-	createNode('.leaderboard', 'div', '', '', '', 'leaderboard__wrap');
-		createNode('.leaderboard__wrap', 'h2', 'Leaderboard', '', '', 'leaderboard__title');
-createNode('body', 'button', '',  'btn-leaderboard', '', 'btn', 'btn-leaderboard');
-
-const body = document.querySelector('body');
-const modal = document.getElementById('modal');
-const hamburger = document.getElementById('btn-hamburger');
-const hamburgerWrap = document.getElementById('hamburger-wrap');
-const btnStart = document.getElementById('btn-start');
-const btnNewGame = document.getElementById('btn-new-game');
-const leaderboard = document.getElementById('leaderboard');
-const btnLeaderboadr = document.getElementById('btn-leaderboard');
-const arrBtnStart = [hamburger, btnStart];
-const leders = [];
-
-function modalClose(e) {
-	e.preventDefault();
-	modal.classList.toggle('modal_active');
-	hamburgerWrap.classList.toggle('hamburger__wrap_active');
-}
-
-arrBtnStart.forEach((btn) => {
-	btn.addEventListener('click', modalClose);
-	btn.addEventListener('click', initializeNewGame, { once: true });
-});
-
-body.addEventListener('click', (event) => {
-	if (event.target === body) {
-		modal.classList.add('modal_active');
-		hamburgerWrap.classList.remove('hamburger__wrap_active');
-		leaderboard.classList.remove('leaderboard_active');
-	}
-});
-
-btnLeaderboadr.addEventListener('click', (e) => {
-	leaderboard.classList.toggle('leaderboard_active');
-});
-
-/* btnNewGame.addEventListener('click', () => {
-	
-}); */
-
-/* createNode('body', 'div', `${moves}`,  'moves', '', 'moves'); */
