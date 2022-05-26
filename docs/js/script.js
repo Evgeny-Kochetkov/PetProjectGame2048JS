@@ -16,7 +16,7 @@ const gameBoard = document.getElementById("game-board");
 
 const grid = new Grid(gameBoard);
 
-const initializeNewGame = () => {
+function initializeNewGame () {
 	for (let i = 0; i < 2; i ++) {
 		grid.randomEmptyCell().tile = new Tile(gameBoard);
 	}
