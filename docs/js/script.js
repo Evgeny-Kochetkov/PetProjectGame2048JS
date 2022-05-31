@@ -160,6 +160,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
 			newTile.waitForTransition(true).then(() => {
 				alert("Game over");
+				clearInterval(intervalId);
 			});
 			return;
 		}
@@ -186,8 +187,9 @@ window.addEventListener('DOMContentLoaded', function() {
 		setupInput();
 	}
 
+	let intervalId;
 	function init() {
-		setInterval(tick, 1000);
+		intervalId = setInterval(tick, 1000);
 	}
 
 	function tick() {
@@ -205,6 +207,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 		document.querySelector('#timer').innerHTML = 
 		'Timer\n' + getZero(HOUR) + ':' + getZero(MIN) + ':' + getZero(SEC);
+		localStorage.setItem('timer', getZero(HOUR) + ':' + getZero(MIN) + ':' + getZero(SEC));
 	}
 
 	function getZero(num){
