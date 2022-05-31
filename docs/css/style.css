@@ -181,7 +181,7 @@ body {
 .btn-leaderboard {
 	z-index: 3;
 	position: fixed;
-	top: 15%;
+	top: 17%;
 	right: 5%;
 	margin: 1%;
 	width: var(--hamburger-size);
@@ -200,7 +200,8 @@ body {
     	padding-top: 100%;
 		background: url('../icons/star.svg') center center/70% no-repeat;
 	}
-/* 	.moves {
+
+	.score {
 		z-index: 3;
 		position: fixed;
 		display: flex;
@@ -208,13 +209,36 @@ body {
 		align-items: center;
 		font-size: 4vmin;
 		font-weight: 700;
-		top: 25%;
-		right: 5%;
+		top: 5%;
+		right: 12.5%;
 		margin: 1%;
-		width: var(--hamburger-size);
-		height: var(--hamburger-size);
+		text-align: center;
+		padding: 5%;
+		width: 20vmin;
+		height: 20vmin;
 		background-color: var(--bg-cell);
 		border-radius: var(--border-radius);
 		transition: 200ms ease-in-out;
 		animation: show 100ms ease-in-out;
-	} */
+	}
+
+	.moves {
+		z-index: 3;
+		position: fixed;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 4vmin;
+		font-weight: 700;
+		top: 27%;
+		right: 12.5%;
+		margin: 1%;
+		text-align: center;
+		padding: 5%;
+		width: 20vmin;
+		height: 20vmin;
+		background-color: var(--bg-cell);
+		border-radius: var(--border-radius);
+		transition: 200ms ease-in-out;
+		animation: show 100ms ease-in-out;
+	}

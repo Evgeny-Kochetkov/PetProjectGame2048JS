@@ -1,7 +1,7 @@
 const gridSize = 4;
 const cellSize = 20;
 const cellGap = 2;
-
+let score = 0;
 export default class Grid {
     #cells;
 
@@ -99,6 +99,8 @@ class Cell {
         this.tile.value = this.tile.value + this.mergeTile.value;
         this.mergeTile.remove();
         this.mergeTile = null;
+        score += this.tile.value;
+        localStorage.setItem('score', score);
         return this.tile.value;
     }
 }

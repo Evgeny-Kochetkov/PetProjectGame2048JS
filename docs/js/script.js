@@ -1,16 +1,19 @@
 //TODO 1) Move back
-//TODO 2) Score and Best Score
-//TODO 3) Modal "Leaderboard"             5|10 DONE!
-//TODO 4) Btn New Game                    5|10 DONE!
+//TODO 2) Score and Best Score				5|10 DONE!
+//TODO 3) Modal "Leaderboard"            	5|10 DONE!
+//TODO 4) Btn New Game                    	5|10 DONE!
 //TODO 5) Ability to change color
 //TODO 6) Ability to change grid size
-//TODO 7) Modal "How to play"              DONE!
+//TODO 7) Modal "How to play"              	DONE!
 //TODO 8) Adaptation for mobile devices
 //TODO 9) Modal "Game Over" and "You Win"
 //TODO 10) Social link
 
 import Grid from "./grid.js";
 import Tile from "./tile.js";
+
+let SCORE = 0;
+let MOVES = 0;
 
 //HTML
 function createNode(parentSelector, element, text, id, href, ...classes) {
@@ -54,8 +57,17 @@ const btnStart = document.getElementById('btn-start');
 const btnNewGame = document.getElementById('btn-new-game');
 const leaderboard = document.getElementById('leaderboard');
 const btnLeaderboadr = document.getElementById('btn-leaderboard');
-const arrBtnStart = [hamburger, btnStart];
+const arrBtnStart = [hamburger, btnStart, body];
+const score = document.getElementById('score');
+
 const leders = [];
+const spawnCell = 2;
+
+
+
+/* function getScore() {
+	return score.textContent = localStorage.getItem('score');
+} */
 
 function modalClose(e) {
 	e.preventDefault();
@@ -64,7 +76,9 @@ function modalClose(e) {
 }
 
 arrBtnStart.forEach((btn) => {
-	btn.addEventListener('click', modalClose);
+	if (btn !== body) {
+		btn.addEventListener('click', modalClose);
+	}
 	btn.addEventListener('click', initializeNewGame, { once: true });
 });
 
@@ -76,7 +90,7 @@ body.addEventListener('click', (event) => {
 	}
 });
 
-btnLeaderboadr.addEventListener('click', (e) => {
+btnLeaderboadr.addEventListener('click', () => {
 	leaderboard.classList.toggle('leaderboard_active');
 });
 
@@ -93,7 +107,7 @@ const gameBoard = document.getElementById("game-board");
 const grid = new Grid(gameBoard);
 
 function initializeNewGame () {
-	for (let i = 0; i < 2; i ++) {
+	for (let i = 0; i < spawnCell; i ++) {
 		grid.randomEmptyCell().tile = new Tile(gameBoard);
 	}
 	arrBtnStart.forEach((btn) => {
@@ -153,6 +167,23 @@ async function handleInput(e) {
 		});
 		return;
   	}
+	
+	MOVES++;
+
+	if (MOVES === 1) {
+		localStorage.clear();
+		createNode('body', 'div', `Score:\n${SCORE}`,  'score', '', 'score');
+		createNode('body', 'div', `Moves:\n${MOVES}`,  'moves', '', 'moves');
+	} else {
+		document.querySelector('#moves').innerHTML = `Moves:\n${MOVES}`;
+		localStorage.setItem('moves', MOVES);
+	}
+
+	if (localStorage.getItem('score')) {
+		document.querySelector('#score').innerHTML = "Score:" + "\n" + localStorage.getItem('score');	
+	} else {
+		document.querySelector('#score').innerHTML = `Score:\n${SCORE}`;
+	}
 
  	setupInput();
 }
