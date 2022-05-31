@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
-	/* new createNode('', '', '', '', '', ''); */
+	/* createNode('', '', '', '', '', ''); */
 	createNode('body', 'div', '', 'modal', '', 'modal');
 		createNode('.modal', 'div', '', '', '', 'content');
 			createNode('.content', 'h1', '2048', '', '', 'modal__h1');
@@ -51,8 +51,14 @@ window.addEventListener('DOMContentLoaded', function() {
 			createNode('.hamburger__wrap', 'div', '',  '', '', 'hamburger__line');
 	createNode('body', 'div', '', 'leaderboard', '', 'leaderboard');
 		createNode('.leaderboard', 'div', '', '', '', 'leaderboard__wrap');
-			createNode('.leaderboard__wrap', 'h2', 'Leaderboard', '', '', 'leaderboard__title');
+			createNode('.leaderboard__wrap', 'h2', 'Your results', '', '', 'leaderboard__title');
 	createNode('body', 'button', '',  'btn-leaderboard', '', 'btn', 'btn-leaderboard');
+	createNode('body', 'div', '', 'game-over', '', 'game-over', 'game-over_active');
+		createNode('.game-over', 'div', '', '', '', 'game-over-content');
+			createNode('.game-over-content', 'h2', 'GAME OVER!', '', '', 'game-over-content__title');
+			createNode('.game-over-content', 'p', 'You have no moves left.', '', '', 'game-over-content__descr');
+			createNode('.game-over-content', 'button', 'New Game',  'btn-new-game-g-o', '', 'btn', 'modal__btn');
+			
 
 	const body = document.querySelector('body');
 	const modal = document.getElementById('modal');
@@ -65,7 +71,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	const arrBtnStart = [hamburger, btnStart, body];
 	const score = document.getElementById('score');
 
-	const leders = [];
+	const results = [];
 	const spawnCell = 2;
 
 	function modalClose(e) {
@@ -159,20 +165,40 @@ window.addEventListener('DOMContentLoaded', function() {
 
 		if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
 			newTile.waitForTransition(true).then(() => {
-				alert("Game over");
 				clearInterval(intervalId);
+
+				const result = {
+					time : localStorage.getItem('timer'),
+					score : localStorage.getItem('score'),
+					moves : localStorage.getItem('moves')
+				};
+
+				document.querySelector('#game-over').classList.toggle('game-over_active');
+
+				if (localStorage.getItem('result')) {
+					const newResult = JSON.parse(localStorage.getItem('result'));
+					console.log(newResult);
+					newResult.push(result);
+					localStorage.setItem('result', JSON.stringify([newResult]));
+				} else {
+					localStorage.setItem('result', JSON.stringify([result]));
+				}
+
+				leaderboard.classList.add('leaderboard_active');
 			});
 			return;
 		}
 		
 		MOVES++;
 
-		if (MOVES === 1) {
-			localStorage.clear();
+		if (MOVES === 1) { // Первый ход не попадет в localStorage...ну и фиг с ним)
+			localStorage.removeItem('timer');
+			localStorage.removeItem('score');
+			localStorage.removeItem('moves');
 			init();
 			createNode('body', 'div', `Score\n${SCORE}`,  'score', '', 'statistics', 'score');
 			createNode('body', 'div', `Moves\n${MOVES}`,  'moves', '', 'statistics', 'moves');
-			createNode('body', 'div', `Timer\n00:00:00`,  'timer', '', 'statistics', 'timer');
+			createNode('body', 'div', `Time\n00:00:00`,  'timer', '', 'statistics', 'timer');
 		} else {
 			document.querySelector('#moves').innerHTML = `Moves\n${MOVES}`;
 			localStorage.setItem('moves', MOVES);
@@ -206,7 +232,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 
 		document.querySelector('#timer').innerHTML = 
-		'Timer\n' + getZero(HOUR) + ':' + getZero(MIN) + ':' + getZero(SEC);
+		'Time\n' + getZero(HOUR) + ':' + getZero(MIN) + ':' + getZero(SEC);
 		localStorage.setItem('timer', getZero(HOUR) + ':' + getZero(MIN) + ':' + getZero(SEC));
 	}
 

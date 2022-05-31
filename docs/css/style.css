@@ -83,14 +83,14 @@ body {
 				height: 14vmin;
 				width: 40vmin;
 				background-color: var(--bg-cell);
-				border-radius: calc(var(--border-radius));
+				border-radius: var(--border-radius);
 				font-size: var(--font-size-btn);
 				font-weight: 700;
 				color: var(--text-color);
 				transition: 200ms ease-in-out;
 			}
 
-			.btn:hover, 
+			.btn:hover,
 			.btn:active {
 				background-color:hsl(var(--hsl-color), 50%, 90%);
 				transition: 200ms ease-in-out;
@@ -233,3 +233,38 @@ body {
 	.timer {
 		top: 49%;
 	}
+
+.game-over {
+	position: fixed;
+	width: 90vmin;
+	height: 90vmin;
+	background-color: var(--bg-board);
+	z-index: 3;
+	border-radius: var(--border-radius);
+	transition: 200ms ease-in-out;
+	animation: show 100ms ease-in-out;
+}
+
+.game-over_active {
+	display: none;
+}
+
+	.game-over-content {
+		display: flex;
+		flex-direction: column;
+		justify-items: center;
+		align-items: center;
+	}
+
+		.game-over-content__title {
+			margin-top: var(--m-t);
+			font-size: 5vmin;
+			color: var(--text-color);
+		}
+
+		.game-over-content__descr {
+			font-size: 4vmin;
+			margin-top: var(--m-t);
+			margin-bottom: var(--m-t);
+			color: #333;
+		}
