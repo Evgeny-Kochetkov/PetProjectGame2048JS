@@ -173,7 +173,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			createNode('body', 'div', `Moves\n${MOVES}`,  'moves', '', 'statistics', 'moves');
 			createNode('body', 'div', `Timer\n00:00:00`,  'timer', '', 'statistics', 'timer');
 		} else {
-			document.querySelector('#moves').innerHTML = `Moves:\n${MOVES}`;
+			document.querySelector('#moves').innerHTML = `Moves\n${MOVES}`;
 			localStorage.setItem('moves', MOVES);
 		}
 
