@@ -14,6 +14,9 @@ import Tile from "./tile.js";
 
 let SCORE = 0;
 let MOVES = 0;
+let SEC = 0;
+let MIN = 0;
+let HOUR = 0;
 
 //HTML
 function createNode(parentSelector, element, text, id, href, ...classes) {
@@ -62,12 +65,6 @@ const score = document.getElementById('score');
 
 const leders = [];
 const spawnCell = 2;
-
-
-
-/* function getScore() {
-	return score.textContent = localStorage.getItem('score');
-} */
 
 function modalClose(e) {
 	e.preventDefault();
@@ -172,20 +169,51 @@ async function handleInput(e) {
 
 	if (MOVES === 1) {
 		localStorage.clear();
-		createNode('body', 'div', `Score:\n${SCORE}`,  'score', '', 'score');
-		createNode('body', 'div', `Moves:\n${MOVES}`,  'moves', '', 'moves');
+		init();
+		createNode('body', 'div', `Score\n${SCORE}`,  'score', '', 'statistics', 'score');
+		createNode('body', 'div', `Moves\n${MOVES}`,  'moves', '', 'statistics', 'moves');
+		createNode('body', 'div', `Timer\n00:00:00`,  'timer', '', 'statistics', 'timer');
 	} else {
 		document.querySelector('#moves').innerHTML = `Moves:\n${MOVES}`;
 		localStorage.setItem('moves', MOVES);
 	}
 
 	if (localStorage.getItem('score')) {
-		document.querySelector('#score').innerHTML = "Score:" + "\n" + localStorage.getItem('score');	
+		document.querySelector('#score').innerHTML = "Score" + "\n" + localStorage.getItem('score');	
 	} else {
-		document.querySelector('#score').innerHTML = `Score:\n${SCORE}`;
+		document.querySelector('#score').innerHTML = `Score\n${SCORE}`;
 	}
 
  	setupInput();
+}
+
+function init() {
+    setInterval(tick, 1000);
+}
+
+function tick() {
+    SEC++;
+
+    if (SEC >= 60) {
+        MIN++;
+        SEC = SEC - 60;
+    }
+
+    if (MIN >= 60) {
+        HOUR++;
+        MIN = MIN - 60;
+    }
+
+    document.querySelector('#timer').innerHTML = 
+	'Timer\n' + getZero(HOUR) + ':' + getZero(MIN) + ':' + getZero(SEC);
+}
+
+function getZero(num){
+	if (num >= 0 && num < 10) { 
+		return '0' + num;
+	} else {
+		return num;
+	}
 }
 
 function moveUp() {
