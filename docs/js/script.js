@@ -6,7 +6,7 @@
 //TODO 6) Ability to change grid size
 //TODO 7) Modal "How to play"              	DONE!
 //TODO 8) Adaptation for mobile devices
-//TODO 9) Modal "Game Over" and "You Win"
+//TODO 9) Modal "Game Over" and "You Win"	5|10 DONE!
 //TODO 10) Social link
 
 import Grid from "./grid.js";
@@ -71,10 +71,16 @@ window.addEventListener('DOMContentLoaded', function() {
 	const leaderboard = document.getElementById('leaderboard');
 	const btnLeaderboadr = document.getElementById('btn-leaderboard');
 	const arrBtnStart = [hamburger, btnStart, body];
+	const gameOver = document.getElementById('game-over');
+	const btnNewGameGO = document.getElementById('btn-new-game-g-o');
 
-	function modalClose(e) {
-		e.preventDefault();
+	function modalClose() {
 		modal.classList.toggle('modal_active');
+		hamburgerWrap.classList.toggle('hamburger__wrap_active');
+	}
+
+	function modalGameOverClose() {
+		gameOver.classList.toggle('game-over_active');
 		hamburgerWrap.classList.toggle('hamburger__wrap_active');
 	}
 
@@ -96,6 +102,26 @@ window.addEventListener('DOMContentLoaded', function() {
 	btnLeaderboadr.addEventListener('click', () => {
 		leaderboard.classList.toggle('leaderboard_active');
 	});
+
+	btnNewGame.addEventListener('click', () => {
+		// Убрать все тайлы
+		grid.clearCell();
+		modalClose();
+
+	});
+
+	btnNewGameGO.addEventListener('click', () => {
+		// Убрать все тайлы
+
+		modalGameOverClose();
+
+		hamburger.removeEventListener('click', modalGameOverClose);
+
+		hamburger.addEventListener('click', modalClose);
+		
+	});
+
+
 
 
 	function sortScore() {
@@ -188,47 +214,12 @@ window.addEventListener('DOMContentLoaded', function() {
 		grid.cells.forEach(cell => cell.mergeTiles());
 
 		const newTile = new Tile(gameBoard);
+
 		grid.randomEmptyCell().tile = newTile;
 
-		/* if (!modal.classList.contains('modal_active')) {
-			hamburger.style.animation = 'shake 200ms ease-in-out';
-		} */
-
-		if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
-			newTile.waitForTransition(true).then(() => {
-				clearInterval(intervalId);
-
-				const result = {
-					time : localStorage.getItem('timer'),
-					score : localStorage.getItem('score'),
-					moves : localStorage.getItem('moves')
-				};
-
-				document.querySelector('#game-over').classList.toggle('game-over_active');
-
-				if (localStorage.getItem('result')) {
-					const newResult = JSON.parse(localStorage.getItem('result'));
-					newResult.push(result);
-					localStorage.setItem('result', JSON.stringify(newResult));
-				} else {
-					localStorage.setItem('result', JSON.stringify([result]));
-				}
-
-				
-
-				sortScore();
-
-				if (!leaderboard.classList.contains('leaderboard_active')) {
-					leaderboard.classList.add('leaderboard_active');
-				}
-				
-			});
-			return;
-		}
-		
 		MOVES++;
 
-		if (MOVES === 1) { // Первый ход не попадет в localStorage...ну и фиг с ним)
+		if (MOVES === 1) {
 			localStorage.removeItem('timer');
 			localStorage.removeItem('score');
 			localStorage.removeItem('moves');
@@ -245,6 +236,49 @@ window.addEventListener('DOMContentLoaded', function() {
 			document.querySelector('#score').innerHTML = "Score" + "\n" + localStorage.getItem('score');	
 		} else {
 			document.querySelector('#score').innerHTML = `Score\n${SCORE}`;
+		}
+
+		if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+			newTile.waitForTransition(true).then(() => {
+				clearInterval(intervalId);
+				
+				gameOver.classList.remove('game-over_active');
+
+				const result = {
+					time : localStorage.getItem('timer'),
+					score : localStorage.getItem('score'),
+					moves : localStorage.getItem('moves')
+				};
+
+				if (localStorage.getItem('result')) {
+					const newResult = JSON.parse(localStorage.getItem('result'));
+					newResult.push(result);
+					localStorage.setItem('result', JSON.stringify(newResult));
+				} else {
+					localStorage.setItem('result', JSON.stringify([result]));
+				}
+
+				sortScore();
+
+				if (!leaderboard.classList.contains('leaderboard_active')) {
+					leaderboard.classList.add('leaderboard_active');
+				}
+
+				if (!modal.classList.contains('modal_active')) {
+					modal.classList.add('modal_active');
+				}
+
+				if (!hamburgerWrap.classList.contains('hamburger__wrap_active')) {
+					hamburgerWrap.classList.add('hamburger__wrap_active');	
+				}
+
+				hamburger.removeEventListener('click', modalClose);
+
+				hamburger.addEventListener('click', modalGameOverClose);
+				
+			});
+
+			return;
 		}
 
 		setupInput();
