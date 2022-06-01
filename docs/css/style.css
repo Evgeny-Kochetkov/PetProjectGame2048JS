@@ -169,14 +169,30 @@ body {
 
 	.leaderboard__wrap {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
+		align-items: center;
 	}
 
 	.leaderboard__title {
 		margin-top: var(--m-t);
+		margin-bottom: var(--m-t);
 		font-size: 4vmin;
 		color: var(--bg-page);
 	}
+
+	.leaderboard__descr {
+		font-size: 2vmin;
+		color: var(--bg-page);
+	}
+
+	.leaderboard__best-score {
+		font-size: 2.2vmin;
+	}
+
+		.leaderboard__best-score li {
+			margin-top: 1vmin;
+		}
 
 .btn-leaderboard {
 	z-index: 3;

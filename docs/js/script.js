@@ -19,6 +19,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	let SEC = 0;
 	let MIN = 0;
 	let HOUR = 0;
+	const SPAWN_CELL = 2;
 
 	//HTML
 	function createNode(parentSelector, element, text, id, href, ...classes) {
@@ -52,6 +53,8 @@ window.addEventListener('DOMContentLoaded', function() {
 	createNode('body', 'div', '', 'leaderboard', '', 'leaderboard');
 		createNode('.leaderboard', 'div', '', '', '', 'leaderboard__wrap');
 			createNode('.leaderboard__wrap', 'h2', 'Your results', '', '', 'leaderboard__title');
+			createNode('.leaderboard__wrap', 'p', 'Top five scores', '', '', 'leaderboard__descr');
+			createNode('.leaderboard__wrap', 'ul', '', '', '', 'leaderboard__best-score');
 	createNode('body', 'button', '',  'btn-leaderboard', '', 'btn', 'btn-leaderboard');
 	createNode('body', 'div', '', 'game-over', '', 'game-over', 'game-over_active');
 		createNode('.game-over', 'div', '', '', '', 'game-over-content');
@@ -59,7 +62,6 @@ window.addEventListener('DOMContentLoaded', function() {
 			createNode('.game-over-content', 'p', 'You have no moves left.', '', '', 'game-over-content__descr');
 			createNode('.game-over-content', 'button', 'New Game',  'btn-new-game-g-o', '', 'btn', 'modal__btn');
 			
-
 	const body = document.querySelector('body');
 	const modal = document.getElementById('modal');
 	const hamburger = document.getElementById('btn-hamburger');
@@ -69,10 +71,6 @@ window.addEventListener('DOMContentLoaded', function() {
 	const leaderboard = document.getElementById('leaderboard');
 	const btnLeaderboadr = document.getElementById('btn-leaderboard');
 	const arrBtnStart = [hamburger, btnStart, body];
-	const score = document.getElementById('score');
-
-	const results = [];
-	const spawnCell = 2;
 
 	function modalClose(e) {
 		e.preventDefault();
@@ -99,9 +97,38 @@ window.addEventListener('DOMContentLoaded', function() {
 		leaderboard.classList.toggle('leaderboard_active');
 	});
 
-	/* btnNewGame.addEventListener('click', () => {
+
+	function sortScore() {
+		if (!localStorage.getItem('result')) {
+			return;
+		}
+		const sortScore = JSON.parse(localStorage.getItem('result')).sort((a, b) => {
+			if (+a.score >= +b.score) {
+				return -1;
+			}
+
+			if (+a.score < +b.score) {
+				return 1;
+			}
+		});
 		
-	}); */
+		if (sortScore.length > 4) {
+			sortScore.splice(5);
+		}
+
+		localStorage.setItem('result', JSON.stringify(sortScore));
+
+		const ul = document.querySelector('.leaderboard__best-score');
+		while (ul.firstChild) {
+			ul.removeChild(ul.firstChild);
+		}
+
+		sortScore.forEach((item, i) => {
+			createNode('.leaderboard__best-score', 'li', `${i+1}. Score: ${item.score} Moves: ${item.moves} \n Time: ${item.time}`, '', '', 'li');
+		});
+	}
+
+	sortScore();
 
 	//GAME
 	const gameBoard = document.getElementById("game-board");
@@ -109,7 +136,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	const grid = new Grid(gameBoard);
 
 	function initializeNewGame () {
-		for (let i = 0; i < spawnCell; i ++) {
+		for (let i = 0; i < SPAWN_CELL; i ++) {
 			grid.randomEmptyCell().tile = new Tile(gameBoard);
 		}
 		arrBtnStart.forEach((btn) => {
@@ -163,6 +190,10 @@ window.addEventListener('DOMContentLoaded', function() {
 		const newTile = new Tile(gameBoard);
 		grid.randomEmptyCell().tile = newTile;
 
+		/* if (!modal.classList.contains('modal_active')) {
+			hamburger.style.animation = 'shake 200ms ease-in-out';
+		} */
+
 		if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
 			newTile.waitForTransition(true).then(() => {
 				clearInterval(intervalId);
@@ -177,14 +208,20 @@ window.addEventListener('DOMContentLoaded', function() {
 
 				if (localStorage.getItem('result')) {
 					const newResult = JSON.parse(localStorage.getItem('result'));
-					console.log(newResult);
 					newResult.push(result);
-					localStorage.setItem('result', JSON.stringify([newResult]));
+					localStorage.setItem('result', JSON.stringify(newResult));
 				} else {
 					localStorage.setItem('result', JSON.stringify([result]));
 				}
 
-				leaderboard.classList.add('leaderboard_active');
+				
+
+				sortScore();
+
+				if (!leaderboard.classList.contains('leaderboard_active')) {
+					leaderboard.classList.add('leaderboard_active');
+				}
+				
 			});
 			return;
 		}
