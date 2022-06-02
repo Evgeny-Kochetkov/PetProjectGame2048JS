@@ -7,21 +7,7 @@
 }
 
 @media screen and (max-width: 1023px) {
-    .statistics {
-		right: 5%;
-	}
-
-    .score {
-		top: 27.5%;
-	}
-
-	.moves {
-		top: 49.5%;
-	}
-
-	.timer {
-		top: 71.5%;
-	}
+    
 }
   
 @media screen and (max-width: 768px) {

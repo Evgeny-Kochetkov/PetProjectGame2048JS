@@ -154,7 +154,7 @@ body {
 	position: fixed;
 	align-items: center;
 	left: -100%;
-	width: 50vmin;
+	width: 25vmax;
 	height: 90vmin;
 	background-color: var(--bg-board);
 	z-index: 2;
@@ -224,10 +224,8 @@ body {
 		font-size: 4vmin;
 		color: var(--bg-page);
 		font-weight: 700;
-		right: 12.5%;
-		/* margin: 1%; */
+		right: 13vmax;
 		text-align: center;
-		padding: 5%;
 		width: 20vmin;
 		height: 20vmin;
 		background-color: var(--bg-cell);
@@ -237,15 +235,17 @@ body {
 	}
 
 	.score {
-		top: 5%;
+		top: 7vmin;
+		padding: 0 2vmax 0 2vmax;
 	}
 
 	.moves {
-		top: 27%;
+		top: 29vmin;
+		padding: 0 2vmax 0 2vmax;
 	}
 
 	.timer {
-		top: 49%;
+		top: 51vmin;
 	}
 
 .game-over {
