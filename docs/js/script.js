@@ -126,7 +126,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	function sortScore() {
 		if (!localStorage.getItem('result')) {
-			return false;
+			return;
 		}
 
 		const sortScore = JSON.parse(localStorage.getItem('result')).sort((a, b) => {
