@@ -114,9 +114,8 @@ body {
 		.hamburger {
 			z-index: 3;
 			position: fixed;
-			top: 5%;
-			right: 5%;
-			margin: 1%;
+			top: 7vmin;
+			right: 5vmax;
 			width: var(--hamburger-size);
 			height: var(--hamburger-size);
 			background-color: var(--bg-cell);
@@ -197,9 +196,8 @@ body {
 .btn-leaderboard {
 	z-index: 3;
 	position: fixed;
-	top: 17%;
-	right: 5%;
-	margin: 1%;
+	top: 19vmin;
+	right: 5vmax;
 	width: var(--hamburger-size);
 	height: var(--hamburger-size);
 	background-color: var(--bg-cell);
@@ -227,7 +225,7 @@ body {
 		color: var(--bg-page);
 		font-weight: 700;
 		right: 12.5%;
-		margin: 1%;
+		/* margin: 1%; */
 		text-align: center;
 		padding: 5%;
 		width: 20vmin;
